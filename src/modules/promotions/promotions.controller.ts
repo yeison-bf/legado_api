@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Query, UseGuards, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query, UseGuards, Param, Delete } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { PromotionsService } from './promotions.service';
 import { GetUser } from '../../common/decorators/get-user.decorator';
@@ -33,5 +33,10 @@ export class PromotionsController {
   @Post(':id/messages')
   sendMessage(@Param('id') id: string, @Body('content') content: string, @GetUser() user: User) {
     return this.promotionsService.sendMessage(+id, content, user);
+  }
+
+  @Delete(':id/leave')
+  leaveGroup(@Param('id') id: string, @GetUser() user: User) {
+    return this.promotionsService.leaveGroup(+id, user.id);
   }
 }

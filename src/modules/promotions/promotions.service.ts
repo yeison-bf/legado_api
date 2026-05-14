@@ -104,4 +104,12 @@ export class PromotionsService {
     
     return qb.getMany();
   }
+
+  async leaveGroup(groupId: number, userId: number) {
+    const member = await this.memberRepository.findOne({
+      where: { user: { id: userId }, promotionGroup: { id: groupId } },
+    });
+    if (!member) throw new NotFoundException('No eres miembro de este grupo');
+    return this.memberRepository.remove(member);
+  }
 }
