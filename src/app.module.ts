@@ -12,6 +12,7 @@ import { UserExperienceModule } from './modules/user-experience/user-experience.
 import { UserPublicationsModule } from './modules/user-publications/user-publications.module';
 import { UserLanguagesModule } from './modules/user-languages/user-languages.module';
 import { PromotionsModule } from './modules/promotions/promotions.module';
+import { ProgramsModule } from './modules/programs/programs.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { PromotionsModule } from './modules/promotions/promotions.module';
     UserPublicationsModule,
     UserLanguagesModule,
     PromotionsModule,
+    ProgramsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

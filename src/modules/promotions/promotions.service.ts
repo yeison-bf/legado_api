@@ -18,11 +18,12 @@ export class PromotionsService {
   ) {}
 
   async findOrCreateGroup(data: any, user: User) {
+    // Regla: Solo un grupo por programa (y año/institución)
     const existingGroup = await this.groupRepository.findOne({
       where: {
         year: Number(data.year),
         programName: data.programName,
-        groupName: data.groupName,
+        // No filtramos por groupName aquí si queremos forzar "uno por programa"
         institutionId: user.institution?.id,
       },
     });
@@ -32,7 +33,7 @@ export class PromotionsService {
     const newGroup = this.groupRepository.create({
       year: Number(data.year),
       programName: data.programName,
-      groupName: data.groupName,
+      groupName: data.groupName || 'Grupo Único', // Si solo hay uno, el nombre es genérico o el que envíen
       institutionId: user.institution?.id,
       createdBy: user,
     });
